@@ -19,9 +19,9 @@
 #define RIGHT_MOTOR_DIR GPIO_NUM_33
 
 #define PWM_FREQ_HZ 50 // 20 kHz
-#define PWM_RESOLUTION LEDC_TIMER_10_BIT
+#define PWM_RESOLUTION LEDC_TIMER_16_BIT
 #define PWM_PERIOD_US 20000
-#define PWM_MAX_DUTY ((1 << 16) - 1) // 1023 for 10-bit
+#define PWM_MAX_DUTY ((1 << 16) - 1) // 65535 for 16-bit
 
 #define PULSE_NEUTRAL_US 1500
 #define PULSE_MIN_US 1050
@@ -161,8 +161,9 @@ void app_main(void)
     motor_pwm_init();
 
     // Example: both motors forward at 50%
-    set_left_motor(100);
-    set_right_motor(100);
+    set_left_motor(0);
+    set_right_motor(0);
+    vTaskDelay(pdMS_TO_TICKS(2000));
 
     while (1)
     {
