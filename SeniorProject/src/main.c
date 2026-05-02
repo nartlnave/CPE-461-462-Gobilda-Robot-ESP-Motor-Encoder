@@ -125,20 +125,17 @@ static void set_left_motor(int speed_percent)
 
 static void set_right_motor(int speed_percent)
 {
-    if (speed_percent >= 0)
-    {
-        gpio_set_level(RIGHT_MOTOR_DIR, 1);
-    }
-    else
-    {
-        gpio_set_level(RIGHT_MOTOR_DIR, 0);
-        speed_percent = -speed_percent;
-    }
-
     if (speed_percent > 100)
+    {
         speed_percent = 100;
+    }
+    if (speed_percent < -100)
+    {
+        speed_percent = -100;
+    }
 
-    uint32_t duty = (speed_percent * PWM_MAX_DUTY) / 100;
+    uint32_t pulse_us = PULSE_NEUTRAL_US + (speed_percent * 450) / 100;
+    uint32_t duty = us_to_duty(pulse_us);
     ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_1, duty);
     ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_1);
 }
