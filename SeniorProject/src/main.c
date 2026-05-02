@@ -177,25 +177,8 @@ void app_main(void)
         for (int i = 0; i < 100; i++)
         {
             set_left_motor(i);
+            set_right_motor(i);
             vTaskDelay(pdMS_TO_TICKS(10));
-        }
-
-        for (int i = 100; i > 0; i--)
-        {
-            set_left_motor(i);
-            vTaskDelay(pdMS_TO_TICKS(10));
-        }
-
-        for (int i = 0; i < 100; i++)
-        {
-            set_left_motor(i);
-            vTaskDelay(pdMS_TO_TICKS(5));
-        }
-
-        for (int i = 100; i > 0; i--)
-        {
-            set_left_motor(i);
-            vTaskDelay(pdMS_TO_TICKS(20));
         }
     }
 }
