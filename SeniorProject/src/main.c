@@ -180,5 +180,12 @@ void app_main(void)
             set_right_motor(i);
             vTaskDelay(pdMS_TO_TICKS(10));
         }
+
+        for (int i = 100; i > 0; i--)
+        {
+            set_left_motor(i);
+            set_right_motor(i);
+            vTaskDelay(pdMS_TO_TICKS(10));
+        }
+
     }
-}
