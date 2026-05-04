@@ -35,11 +35,11 @@ static void IRAM_ATTR left_encoder_isr(void *arg)
     int b_state = gpio_get_level(LEFT_ENC_GPIO_B); // read state of channel B to determine directiond
     if (b_state == 0) // if B is low, we are moving in one direction
     {
-        left_ticks--; // decrement tick count
+        left_ticks++; // increment tick count
     }
     else // if B is high, we are moving in the opposite direction
     {
-        left_ticks++; // increment tick count
+        left_ticks--; // decrement tick count
     }
 }
 
@@ -176,17 +176,19 @@ void app_main(void)
         // Left PWM (GPIO 13) is also set to the ESP LED, will be used to test PWM output
         for (int i = 0; i < 100; i++)
         {
-            set_left_motor(i);
+            set_left_motor(-i);
             set_right_motor(i);
-            printf("Speed; %d%% | L: %" PRId32 " | R: %" PRId32 "\n", 
+            printf("Speed: %d%% | L: %" PRId32 " | R: %" PRId32 "\n", 
                    i, left_ticks, right_ticks);
             vTaskDelay(pdMS_TO_TICKS(10));
         }
 
         for (int i = 100; i >= 0; i--)
         {
-            set_left_motor(i);
+            set_left_motor(-i);
             set_right_motor(i);
+            printf("Speed: %d%% | L: %" PRId32 " | R: %" PRId32 "\n", 
+                   i, left_ticks, right_ticks);
             vTaskDelay(pdMS_TO_TICKS(10));
         }
     }
