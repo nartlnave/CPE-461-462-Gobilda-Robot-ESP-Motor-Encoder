@@ -32,7 +32,7 @@
 /* control-loop settings */
 #define ENCODER_SAMPLE_MS       100
 #define PWM_CONTROL_MS          100
-#define TARGET_TICKS_PER_SEC    300     // tune this for your desired wheel speed
+#define TARGET_TICKS_PER_SEC    100    // tune this for your desired wheel speed
 #define SPEED_TOLERANCE_TPS     20      // acceptable encoder speed error
 #define PWM_STEP_PERCENT        2       // how much to increase/decrease when error is too large
 #define INITIAL_PWM_PERCENT     20      // starting motor command
